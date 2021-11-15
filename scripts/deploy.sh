@@ -19,15 +19,19 @@ sshpass -p $PASSWORD rsync -r -v --progress . schife@team-h.cs.rpi.edu:~/deploym
 
 echo "Connecting to server and running commands"
 sshpass -p $PASSWORD ssh schife@team-h.cs.rpi.edu "
+
+export DOCKER_TLS_VERIFY=\"1\"
+export DOCKER_HOST=\"tcp://192.168.49.2:2376\"
+export DOCKER_CERT_PATH=\"/home/schife/.minikube/certs\"
+export MINIKUBE_ACTIVE_DOCKERD=\"minikube\"
+
+docker images
+
 cd deployment
-docker build -f Dockerfile -t ranking_deploy_2 .
+docker build -f Dockerfile -t ranking_deploy .
 echo \"Done building docker image\"
-pwd
-docker image ls
-whoami
 
-
-
+echo \"Applying kubernetes yaml\"
 kubectl apply -f ./kubernetes/deployment.yml
-# kubectl get all
+kubectl rollout restart deployment ranking
 "

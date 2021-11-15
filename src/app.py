@@ -6,7 +6,7 @@ print("started")
 
 @app.route("/")
 def hello_world():
-    return "Hello from Python!"
+    return "The python web server is running!\n"
 
 
 if __name__ == "__main__":
