@@ -8,5 +8,5 @@ RUN pip install --no-cache-dir -r requirements.txt
 COPY . .
 
 EXPOSE 5000
-CMD [ "ddtrace-run", "python", "./src/app.py" ]
-# CMD [ "python", "./src/app.py" ]
+# CMD [ "ddtrace-run", "python", "./src/app.py" ]
+CMD [ "python", "./src/app.py" ]
