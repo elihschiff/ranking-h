@@ -1,4 +1,4 @@
-from flask import Flask
+from flask import Flask, request
 import subprocess
 import logging
 
@@ -14,6 +14,17 @@ def hello_world():
 def githash():
     logging.info('Git version requested')
     return subprocess.check_output(['git', 'rev-parse', 'HEAD']).decode('utf-8')
+
+@app.route("/rank")
+def rank():
+    queries = request.args.getlist('queries')
+    for query in queries:
+        # make request to indexing team
+        # rank in order of frequency
+        i = 0
+
+    #return result
+    return "" 
 
 
 if __name__ == "__main__":
